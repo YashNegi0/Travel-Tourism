@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wayfarer — Find Your Next Destination</title>
+<meta name="description" content="Wayfarer is a travel and tourism web app: browse destinations, view photos, check live weather, find places and stays, and estimate your trip budget.">
+<meta name="theme-color" content="#1F5C56">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="#top">Wayfarer</a>
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="#destinations">Destinations</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#weather">Weather</a>
+      <a href="#places">Places</a>
+      <a href="#stays">Stays</a>
+      <a href="#tips">Tips</a>
+      <a href="#budget">Budget</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="main-nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero" id="top">
+  <div class="hero-content">
+    <p class="hero-eyebrow">A field guide for the curious traveler</p>
+    <h1>Where to next?</h1>
+    <p class="hero-sub">Discover destinations, check the weather, and plan a trip that fits your budget — all in one place.</p>
+    <form class="hero-search" id="hero-search-form" role="search">
+      <label class="visually-hidden" for="destination-search">Search destinations</label>
+      <input type="search" id="destination-search" placeholder="Search a destination, e.g. Kyoto" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <ul class="hero-stats" id="hero-stats"></ul>
+  </div>
+</section>
+
+<section class="section" id="destinations">
+  <div class="section-head">
+    <h2>Browse by category</h2>
+    <p>Every trip starts with a mood. Pick yours.</p>
+  </div>
+  <div class="category-row" id="category-row" role="group" aria-label="Filter destinations by category"></div>
+  <p class="result-count" id="result-count" aria-live="polite"></p>
+  <div class="destination-grid" id="destination-grid"></div>
+</section>
+
+<section class="section alt" id="gallery">
+  <div class="section-head">
+    <h2>Scenes from the road</h2>
+    <p>Tap any photo for a closer look.</p>
+  </div>
+  <div class="gallery-grid" id="gallery-grid"></div>
+</section>
+
+<section class="section" id="weather">
+  <div class="section-head">
+    <h2>Check before you pack</h2>
+    <p>Live conditions for your destination.</p>
+  </div>
+  <div class="weather-panel">
+    <form id="weather-form">
+      <label class="visually-hidden" for="weather-city">City</label>
+      <input type="text" id="weather-city" placeholder="Enter a city" autocomplete="off">
+      <button type="submit">Get weather</button>
+    </form>
+    <div id="weather-result" class="weather-result" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section alt" id="places">
+  <div class="section-head">
+    <h2>Places worth the detour</h2>
+    <p>A shortlist of sights to build your itinerary around.</p>
+  </div>
+  <div class="places-list" id="places-list"></div>
+</section>
+
+<section class="section" id="stays">
+  <div class="section-head">
+    <h2>Where to stay</h2>
+    <p>Options across a range of budgets.</p>
+  </div>
+  <div class="hotel-grid" id="hotel-grid"></div>
+</section>
+
+<section class="section alt" id="tips">
+  <div class="section-head">
+    <h2>Travel tips</h2>
+    <p>Small things that make a trip smoother.</p>
+  </div>
+  <div class="tips-list" id="tips-list"></div>
+</section>
+
+<section class="section" id="budget">
+  <div class="section-head">
+    <h2>Budget calculator</h2>
+    <p>Rough out the cost of your trip.</p>
+  </div>
+  <div class="budget-panel">
+    <form class="budget-form" id="budget-form" novalidate>
+      <label for="b-days">Trip length (days)<input type="number" id="b-days" min="1" max="365" value="5"></label>
+      <label for="b-hotel">Hotel per night (₹)<input type="number" id="b-hotel" min="0" value="4500"></label>
+      <label for="b-food">Food per day (₹)<input type="number" id="b-food" min="0" value="1500"></label>
+      <label for="b-activities">Activities per day (₹)<input type="number" id="b-activities" min="0" value="1500"></label>
+      <label for="b-transport">Flights / transport (₹)<input type="number" id="b-transport" min="0" value="25000"></label>
+      <label for="b-travelers">Travelers<input type="number" id="b-travelers" min="1" max="20" value="1"></label>
+      <button type="button" class="reset-btn" id="budget-reset">Reset</button>
+    </form>
+    <div class="budget-result" aria-live="polite">
+      <span>Estimated total</span>
+      <strong id="budget-total">₹0</strong>
+      <span class="per-day" id="budget-perday"></span>
+      <ul class="breakdown" id="budget-breakdown"></ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lightbox-close" id="lightbox-close" aria-label="Close photo">&times;</button>
+  <button class="lightbox-nav prev" id="lightbox-prev" aria-label="Previous photo">&#8249;</button>
+  <figure>
+    <img id="lightbox-img" src="" alt="">
+    <figcaption id="lightbox-caption"></figcaption>
+  </figure>
+  <button class="lightbox-nav next" id="lightbox-next" aria-label="Next photo">&#8250;</button>
+</div>
+
+<button class="to-top" id="to-top" aria-label="Back to top">&uarr;</button>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <span class="logo">Wayfarer</span>
+      <p>A travel &amp; tourism web project built with HTML, CSS and vanilla JavaScript.</p>
+    </div>
+    <div>
+      <h3>Explore</h3>
+      <a href="#destinations">Destinations</a>
+      <a href="#weather">Weather</a>
+      <a href="#budget">Budget</a>
+    </div>
+    <div>
+      <h3>Credits</h3>
+      <a href="https://unsplash.com" target="_blank" rel="noopener">Photos: Unsplash</a>
+      <a href="https://open-meteo.com" target="_blank" rel="noopener">Weather: Open-Meteo</a>
+    </div>
+  </div>
+  <p class="copyright">&copy; <span id="year"></span> Wayfarer. For educational use.</p>
+</footer>
+
+<script src="js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/search.js"></script>
+<script src="js/budget.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

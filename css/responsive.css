@@ -1,0 +1,56 @@
+@media (max-width: 900px) {
+  .destination-grid { grid-template-columns: repeat(2, 1fr); }
+  .hotel-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery-grid { column-count: 2; }
+  .budget-panel { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--paper);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--line);
+    display: none;
+  }
+
+  .main-nav.open { display: flex; }
+
+  .main-nav a {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .nav-toggle { display: flex; }
+
+  .hero { padding: 3rem 1.25rem 4rem; }
+
+  .hero-search { flex-direction: column; border-radius: 14px; }
+
+  .hero-search button { margin-top: 0.4rem; }
+
+  .section { padding: 3rem 1.25rem; }
+
+  .destination-grid { grid-template-columns: 1fr; }
+
+  .hotel-grid { grid-template-columns: 1fr; }
+
+  .gallery-grid { column-count: 1; }
+
+  .places-list { grid-template-columns: 1fr; }
+
+  .budget-form { grid-template-columns: 1fr; }
+
+  .footer-inner { grid-template-columns: 1fr; }
+
+  .lightbox-nav.prev { left: 0.5rem; }
+
+  .lightbox-nav.next { right: 0.5rem; }
+
+  .budget-result strong { font-size: 2rem; }
+}
