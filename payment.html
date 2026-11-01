@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Payment — Wayfarer</title>
+<meta name="description" content="Review your trip and complete payment with card, UPI or net banking.">
+<meta name="theme-color" content="#1F5C56">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="pay-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">Wayfarer</a>
+    <div class="header-links">
+      <a href="index.html#budget">&larr; Edit trip</a>
+      <div class="auth-slot" id="auth-slot"></div>
+    </div>
+  </div>
+</header>
+
+<main class="pay-shell" id="main">
+
+  <div class="pay-grid" id="pay-grid">
+    <section class="pay-main">
+      <div class="pay-head">
+        <p class="eyebrow">Checkout</p>
+        <h1>Complete your booking</h1>
+        <p class="auth-sub" id="paying-as"></p>
+      </div>
+
+      <div class="segmented three" role="tablist" aria-label="Payment method">
+        <span class="seg-thumb" id="method-thumb"></span>
+        <button type="button" role="tab" data-method="card" aria-selected="true">Card</button>
+        <button type="button" role="tab" data-method="upi" aria-selected="false">UPI</button>
+        <button type="button" role="tab" data-method="netbanking" aria-selected="false">Net banking</button>
+      </div>
+
+      <form id="pay-form" novalidate>
+
+        <div class="method-panel" id="panel-card">
+          <div class="card-scene" aria-hidden="true">
+            <div class="credit-card" id="credit-card">
+              <div class="face front">
+                <div class="card-top"><span class="chip"></span><span class="brand" id="cc-brand">CARD</span></div>
+                <p class="cc-number" id="cc-number">•••• •••• •••• ••••</p>
+                <div class="card-bottom">
+                  <div><small>Card holder</small><span id="cc-name">YOUR NAME</span></div>
+                  <div><small>Expires</small><span id="cc-exp">MM/YY</span></div>
+                </div>
+              </div>
+              <div class="face back">
+                <div class="stripe"></div>
+                <div class="cvv-strip"><small>CVV</small><span id="cc-cvv">•••</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="card-number">Card number</label>
+            <input type="text" id="card-number" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="23">
+            <p class="field-error" id="card-number-err"></p>
+          </div>
+          <div class="field">
+            <label for="card-name">Name on card</label>
+            <input type="text" id="card-name" autocomplete="cc-name" placeholder="As printed on the card">
+            <p class="field-error" id="card-name-err"></p>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="card-exp">Expiry</label>
+              <input type="text" id="card-exp" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5">
+              <p class="field-error" id="card-exp-err"></p>
+            </div>
+            <div class="field">
+              <label for="card-cvv">CVV</label>
+              <input type="password" id="card-cvv" inputmode="numeric" autocomplete="cc-csc" placeholder="•••" maxlength="4">
+              <p class="field-error" id="card-cvv-err"></p>
+            </div>
+          </div>
+          <p class="test-hint">Demo card: <button type="button" class="link-btn" id="fill-demo">fill test details</button></p>
+        </div>
+
+        <div class="method-panel" id="panel-upi" hidden>
+          <div class="field">
+            <label for="upi-id">UPI ID</label>
+            <input type="text" id="upi-id" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="name@bank">
+            <p class="field-error" id="upi-id-err"></p>
+          </div>
+          <p class="field-hint">You'll get a collect request in your UPI app. Approve it to finish paying.</p>
+        </div>
+
+        <div class="method-panel" id="panel-netbanking" hidden>
+          <div class="field">
+            <label for="bank">Choose your bank</label>
+            <select id="bank">
+              <option value="">Select a bank</option>
+              <option>State Bank of India</option>
+              <option>HDFC Bank</option>
+              <option>ICICI Bank</option>
+              <option>Axis Bank</option>
+              <option>Kotak Mahindra Bank</option>
+              <option>Punjab National Bank</option>
+              <option>Bank of Baroda</option>
+            </select>
+            <p class="field-error" id="bank-err"></p>
+          </div>
+          <p class="field-hint">You'll be redirected to your bank to authorise the payment.</p>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="agree">
+          <span>I agree to the booking terms and cancellation policy.</span>
+        </label>
+        <p class="field-error" id="agree-err"></p>
+
+        <div class="form-alert error" id="pay-alert" role="alert" hidden></div>
+
+        <button type="submit" class="primary-btn pay-btn" id="pay-btn">Pay</button>
+        <p class="secure-note"><span aria-hidden="true">&#128274;</span> Demo checkout. No real payment is made and card details are never stored.</p>
+      </form>
+    </section>
+
+    <aside class="summary" aria-labelledby="summary-title">
+      <h2 id="summary-title">Order summary</h2>
+      <p class="summary-trip" id="summary-trip"></p>
+      <ul class="summary-lines" id="summary-lines"></ul>
+
+      <form class="coupon" id="coupon-form">
+        <label class="visually-hidden" for="coupon-input">Coupon code</label>
+        <input type="text" id="coupon-input" placeholder="Coupon code" autocomplete="off" autocapitalize="characters">
+        <button type="submit">Apply</button>
+      </form>
+      <p class="coupon-msg" id="coupon-msg" aria-live="polite"></p>
+
+      <ul class="summary-totals" id="summary-totals"></ul>
+      <div class="summary-grand"><span>Total</span><strong id="grand-total"></strong></div>
+    </aside>
+  </div>
+
+  <section class="success" id="success" hidden aria-live="polite">
+    <div class="success-icon" aria-hidden="true">
+      <svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24" fill="none"/><path d="M15 27l8 8 15-17" fill="none"/></svg>
+    </div>
+    <h1>Payment successful</h1>
+    <p class="auth-sub" id="success-sub"></p>
+    <dl class="receipt" id="receipt"></dl>
+    <div class="success-actions">
+      <a class="primary-btn" href="index.html">Back to home</a>
+      <a class="ghost-btn" href="index.html#budget">Plan another trip</a>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/payment.js"></script>
+</body>
+</html>

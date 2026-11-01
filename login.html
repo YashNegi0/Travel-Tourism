@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log in — Wayfarer</title>
+<meta name="description" content="Sign in or create your Wayfarer account to book and pay for your next trip.">
+<meta name="theme-color" content="#1F5C56">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main class="auth-shell" id="main">
+  <aside class="auth-visual" aria-hidden="true">
+    <div class="visual-overlay">
+      <a class="logo" href="index.html">Wayfarer</a>
+      <blockquote>
+        <p>The world is a book, and those who do not travel read only one page.</p>
+        <cite>Saint Augustine</cite>
+      </blockquote>
+    </div>
+  </aside>
+
+  <section class="auth-panel">
+    <a class="back-link" href="index.html">&larr; Back to home</a>
+
+    <div class="auth-card">
+      <h1 id="auth-title">Welcome back</h1>
+      <p class="auth-sub" id="auth-sub">Sign in to plan, book and pay for your trip.</p>
+
+      <div class="segmented" role="tablist" aria-label="Account">
+        <span class="seg-thumb" id="seg-thumb"></span>
+        <button type="button" role="tab" id="tab-signin" aria-selected="true" aria-controls="form-signin">Sign in</button>
+        <button type="button" role="tab" id="tab-signup" aria-selected="false" aria-controls="form-signup">Create account</button>
+      </div>
+
+      <div class="form-alert" id="form-alert" role="alert" hidden></div>
+
+      <form class="auth-form" id="form-signin" novalidate aria-labelledby="tab-signin">
+        <div class="field">
+          <label for="si-email">Email</label>
+          <input type="email" id="si-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          <p class="field-error" id="si-email-err"></p>
+        </div>
+        <div class="field">
+          <label for="si-password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="si-password" name="password" autocomplete="current-password" placeholder="Your password" required>
+            <button type="button" class="reveal" data-target="si-password" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+          <p class="field-error" id="si-password-err"></p>
+        </div>
+        <button type="submit" class="primary-btn" id="si-submit">Sign in</button>
+      </form>
+
+      <form class="auth-form" id="form-signup" novalidate hidden aria-labelledby="tab-signup">
+        <div class="field">
+          <label for="su-name">Full name</label>
+          <input type="text" id="su-name" name="name" autocomplete="name" placeholder="Your name" required>
+          <p class="field-error" id="su-name-err"></p>
+        </div>
+        <div class="field">
+          <label for="su-email">Email</label>
+          <input type="email" id="su-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+          <p class="field-error" id="su-email-err"></p>
+        </div>
+        <div class="field">
+          <label for="su-password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="su-password" name="password" autocomplete="new-password" placeholder="At least 8 characters" required>
+            <button type="button" class="reveal" data-target="su-password" aria-label="Show password" aria-pressed="false">Show</button>
+          </div>
+          <div class="strength" id="strength" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <p class="field-hint" id="strength-label">Use 8+ characters with letters and numbers.</p>
+          <p class="field-error" id="su-password-err"></p>
+        </div>
+        <div class="field">
+          <label for="su-confirm">Confirm password</label>
+          <input type="password" id="su-confirm" name="confirm" autocomplete="new-password" placeholder="Repeat your password" required>
+          <p class="field-error" id="su-confirm-err"></p>
+        </div>
+        <button type="submit" class="primary-btn" id="su-submit">Create account</button>
+      </form>
+
+      <p class="auth-note">Demo project: accounts are stored only in this browser. Please don't use a real password.</p>
+    </div>
+  </section>
+</main>
+
+<script src="js/utils.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>
